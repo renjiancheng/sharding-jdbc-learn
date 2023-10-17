@@ -16,7 +16,9 @@ public class CspShardingAlgorithms implements StandardShardingAlgorithm<String> 
     public String doSharding(Collection<String> collection, PreciseShardingValue<String> preciseShardingValue) {
         String logicTableName = preciseShardingValue.getLogicTableName();
         String cspId = preciseShardingValue.getValue().substring(0, 3);
-        return logicTableName + "_" + cspId;
+        String tableName = logicTableName + "_" + cspId;
+        collection.add(tableName);
+        return tableName;
     }
 
     @Override
@@ -27,5 +29,10 @@ public class CspShardingAlgorithms implements StandardShardingAlgorithm<String> 
     @Override
     public void init(Properties properties) {
 
+    }
+
+    @Override
+    public Properties getProps() {
+        return null;
     }
 }
