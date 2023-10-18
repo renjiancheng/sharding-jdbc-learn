@@ -3,6 +3,13 @@ mode: # 不配置默认单机
   repository:
     type: JDBC # 持久化仓库类型
 dataSources:
+  default:
+    type: com.alibaba.druid.pool.DruidDataSource
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: zard
   test:
     type: com.alibaba.druid.pool.DruidDataSource
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
@@ -31,5 +38,8 @@ rules:
         props:
           strategy: standard
           algorithmClassName: com.example.shardingjdbclearn.config.CspShardingAlgorithms
+  - !SINGLE
+    tables:
+      - test.*
 props:
   sql-show: true
